@@ -15,9 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
+        android:layout_margin="10dp"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/floating_color"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        app:elevation="4dp"
+        app:pressedTranslationZ="12dp"
+        app:shapeAppearanceOverlay="@style/circularShape"
+       />
 </RelativeLayout>
