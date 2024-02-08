@@ -1,10 +1,12 @@
 package com.example.noteapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +14,7 @@ import com.example.noteapp.R
 import com.example.noteapp.db.Note
 import kotlin.random.Random
 
-class NoteAdapter(val context: Context):RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter(val context: Context, private val itemClickListener: OnItemClickListener):RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
     private val notes= ArrayList<Note>()
 
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,6 +22,15 @@ class NoteAdapter(val context: Context):RecyclerView.Adapter<NoteAdapter.NoteVie
         val textViewTitle: TextView = itemView.findViewById(R.id.titel)
         val textViewDate: TextView = itemView.findViewById(R.id.textDate)
         val cardView: CardView = itemView.findViewById(R.id.cardView)
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClick(notes[position])
+                }
+            }
+        }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteAdapter.NoteViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.note_card, parent, false)
@@ -31,10 +42,8 @@ class NoteAdapter(val context: Context):RecyclerView.Adapter<NoteAdapter.NoteVie
         holder.textViewContent.text = currentNote.content
         holder.textViewTitle.text= currentNote.title
         holder.textViewDate.text= currentNote.date
-
         holder.cardView.setCardBackgroundColor(holder.itemView.resources.getColor(getRandomColor(),null))
     }
-
 
     override fun getItemCount(): Int {
         return notes.size
@@ -51,11 +60,8 @@ class NoteAdapter(val context: Context):RecyclerView.Adapter<NoteAdapter.NoteVie
         val seed = System.currentTimeMillis().toInt()
         val randomIndex = Random(seed).nextInt(listColor.size)
          return listColor[randomIndex]
-
-
     }
-
-
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newNote: List<Note>) {
         notes.clear()
         notes.addAll(newNote)
@@ -63,6 +69,7 @@ class NoteAdapter(val context: Context):RecyclerView.Adapter<NoteAdapter.NoteVie
         notifyDataSetChanged()
 
     }
-
-
+    interface OnItemClickListener {
+        fun onItemClick(note: Note)
+    }
 }

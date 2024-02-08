@@ -11,25 +11,26 @@
             android:id="@+id/editTextNoteTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Note Title"
+            android:hint="@string/note_title"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start|top"
-        android:hint="Enter your note here"
+        android:hint="@string/enter_your_note_here"
         android:inputType="textMultiLine"
         android:padding="16dp"
         android:singleLine="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextNoteTitle"
-         />
+        android:autofillHints="" />
 
     <!-- Save Button -->
     <Button
@@ -37,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

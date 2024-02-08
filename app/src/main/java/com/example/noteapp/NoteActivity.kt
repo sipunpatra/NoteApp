@@ -1,5 +1,6 @@
 package com.example.noteapp
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -25,6 +26,7 @@ class NoteActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun saveNote() {
         val title = binding.editTextNoteTitle.text.toString()
         val content = binding.editTextNote.text.toString()
